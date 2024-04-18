@@ -1,0 +1,5 @@
+let events = []
+
+while (true) {
+  
+}
