@@ -7,7 +7,12 @@ let regExDate = new RegExp(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\
 
 
 while (true) {
-    let option = prompt("Insert the number of the option:\n\n1. Add New Event\n2. Show Events or Look For One\n3. Update Event\n4. Remove Event\n5. Finish")
+    let option = prompt("Insert the number of the option:\n\n" +
+        "1. Add New Event\n" +
+        "2. Show Events or Look For One\n" +
+        "3. Update Event\n" +
+        "4. Remove Event\n" +
+        "5. Finish")
 
     if (option == "5") {
         break
