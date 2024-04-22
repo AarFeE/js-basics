@@ -1,5 +1,6 @@
-const products = []
+    const products = []
 let id = 1
+const regexFilter = new RegExp(/\b(palabra1|palabra2|palabra3|palabra4|palabra5)\b/ig)
 
 
 // MAIN EXECUTION
@@ -61,6 +62,7 @@ while (true) {
 
                 products.push(theProd)
                 id++
+                
                 alert("Product successfully duplicated")
             }
         } else {
@@ -347,6 +349,8 @@ function getProductInfo(anArray, index) {
         prodInfo += `${ent[0].toUpperCase()}: ${ent[1]}\n`
     })
 
+    prodInfo = prodInfo.replaceAll(regexFilter, '*')
+
     return prodInfo
 }
 
@@ -357,6 +361,8 @@ function getAllProductsInfo() {
     products.forEach((product) => {
         prodsInfo += `ID: ${product.id}\nNAME: ${product.name}\nPRICE: $${product.price}\nSTOCK: ${product.stock}\nDESCRIPTION: ${product.description}\n\n`
     })
+
+    prodsInfo = prodsInfo.replaceAll(regexFilter, '*')
 
     return prodsInfo
 }
@@ -376,7 +382,6 @@ function getProduct(findName) {
 }
 
 function filterArray() {
-    const regexFilter = new RegExp(/\b(palabra1|palabra2|palabra3|palabra4|palabra5)\b/i)
     let filteredArray = products.filter((product) => regexFilter.test(product.description))
 
     return filteredArray
