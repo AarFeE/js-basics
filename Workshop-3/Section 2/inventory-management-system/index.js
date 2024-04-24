@@ -79,18 +79,17 @@ while (true) {
                 dupProd = structuredClone(foundProd)
                 const regexProd = new RegExp(`^[A-Z0-9]+ COPY \\d+$`)
 
-                if (regexProd.test(dupProd.name)) {
+                if (regexProd.test(dupProd.name)) { //Checks if the given string coincides with the regex pattern for already created copies and removes its number in case it's one
                     dupProd.name = dupProd.name.replace(/\d+$/, '')
                 } else {
                     dupProd.name += ' COPY '
                 }
 
                 let cont = 1
-                for (let i = 0; i < products.length; i++) {
+                for (let i = 0; i < products.length; i++) { //Gets an unused number for the copy
                     if (products[i].name == dupProd.name + cont) {
                         cont++
-                        i = -1
-                        continue
+                        i = 0
                     }
                 }
 
