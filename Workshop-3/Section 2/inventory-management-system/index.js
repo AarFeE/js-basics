@@ -1,4 +1,4 @@
-    const products = []
+const products = []
 let id = 1
 const regexFilter = new RegExp(/\b(palabra1|palabra2|palabra3|palabra4|palabra5)\b/ig)
 
@@ -40,29 +40,64 @@ while (true) {
 
 
     else if (option == "2" && products.length != 0) {
+        // let foundProd = findProduct("Insert the name of the product you wanna duplicate:")
+
+        // if (foundProd) {
+        //     let dupConf = confirm(`FOUND PRODUCT\n\n${getProductInfo(products, products.indexOf(foundProd))}\n\nAre you sure you wanna duplicate it?`)
+        //     let tempName = foundProd.name
+
+        //     if (dupConf) {
+        //         let theProd = structuredClone(foundProd)
+        //         let cont = 1
+        //         tempName += " COPY"
+
+        //         products.forEach((product) => {
+        //             if (product.name == `${tempName} ${cont}`) {
+        //                 cont++
+        //             }
+        //         })
+
+        //         theProd.name = `${tempName} ${cont}`
+        //         theProd.id = id
+
+        //         products.push(theProd)
+        //         id++
+
+        //         alert("Product successfully duplicated")
+        //     }
+        // } else {
+        //     alert("No product has the inserted name!")
+        // }
+
+
         let foundProd = findProduct("Insert the name of the product you wanna duplicate:")
 
-        if (foundProd != undefined) {
+        if (foundProd) {
             let dupConf = confirm(`FOUND PRODUCT\n\n${getProductInfo(products, products.indexOf(foundProd))}\n\nAre you sure you wanna duplicate it?`)
-            let tempName = foundProd.name
 
             if (dupConf) {
-                let theProd = structuredClone(foundProd)
+                dupProd = structuredClone(foundProd)
+                const regexProd = new RegExp(`^[A-Z0-9]+ COPY \\d+$`)
+
+                if (regexProd.test(dupProd.name)) {
+                    dupProd.name = dupProd.name.replace(/\d+$/, '')
+                } else {
+                    dupProd.name += ' COPY '
+                }
+
                 let cont = 1
-                tempName += " COPY"
-
-                products.forEach((product) => {
-                    if (product.name == `${tempName} ${cont}`) {
+                for (let i = 0; i < products.length; i++) {
+                    if (products[i].name == dupProd.name + cont) {
                         cont++
+                        i = -1
+                        continue
                     }
-                })
+                }
 
-                theProd.name = `${tempName} ${cont}`
-                theProd.id = id
+                dupProd.name += cont
+                dupProd.id = id++
+                products.push(dupProd)
 
-                products.push(theProd)
-                id++
-                
                 alert("Product successfully duplicated")
             }
         } else {
